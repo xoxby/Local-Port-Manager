@@ -1,0 +1,48 @@
+{
+  "name": "local-port-manager",
+  "version": "0.1.0",
+  "description": "Desktop app for managing local development servers and occupied ports on Windows.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win portable"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ports",
+    "localhost",
+    "development",
+    "electron",
+    "windows"
+  ],
+  "devDependencies": {
+    "electron": "^37.10.3",
+    "electron-builder": "^26.8.1"
+  },
+  "build": {
+    "appId": "local.port.manager",
+    "productName": "Local Port Manager",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "Local-Port-Manager-${version}.exe"
+    },
+    "portable": {
+      "artifactName": "Local-Port-Manager-${version}.exe"
+    }
+  }
+}

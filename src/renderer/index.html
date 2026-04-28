@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Local Port Manager</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div>
+          <h1>Local Port Manager</h1>
+          <p data-i18n="subtitle">Управление локальными сайтами, портами и dev-серверами.</p>
+        </div>
+        <div class="top-actions">
+          <label class="language-select">
+            <span data-i18n="language">Язык</span>
+            <select id="languageSelect">
+              <option value="ru">Русский</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+          <button id="scanBtn" data-i18n="scanPorts">Найти порты</button>
+          <button class="primary" id="refreshBtn" data-i18n="refresh">Обновить</button>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="panel project-form">
+          <h2 id="formTitle" data-i18n="newProject">Новый проект</h2>
+          <label>
+            <span data-i18n="name">Название</span>
+            <input id="nameInput" data-placeholder="namePlaceholder" placeholder="Например, React сайт" />
+          </label>
+          <label>
+            <span data-i18n="port">Порт</span>
+            <input id="portInput" type="number" min="1" max="65535" placeholder="5173" />
+          </label>
+          <label>
+            <span data-i18n="folder">Папка проекта</span>
+            <div class="folder-line">
+              <input id="cwdInput" placeholder="C:\Users\user\Desktop\site" />
+              <button id="folderBtn" data-title="chooseFolder" title="Выбрать папку">...</button>
+            </div>
+          </label>
+          <label>
+            <span data-i18n="command">Команда запуска</span>
+            <input id="commandInput" placeholder="npm run dev -- --host 127.0.0.1 --port {port}" />
+          </label>
+          <div class="form-actions">
+            <button class="primary" id="saveBtn" data-i18n="save">Сохранить</button>
+            <button id="clearBtn" data-i18n="clear">Очистить</button>
+          </div>
+          <p class="hint" data-i18n-html="hint">Для Vite часто подходит команда <code>npm run dev -- --host 127.0.0.1 --port {port}</code>. Значение <code>{port}</code> подставится автоматически.</p>
+        </aside>
+
+        <section class="content">
+          <div class="section-head">
+            <h2 data-i18n="projects">Проекты</h2>
+            <span id="summary"></span>
+          </div>
+          <div id="projectList" class="project-list"></div>
+
+          <div class="section-head ports-head">
+            <h2 data-i18n="foundPorts">Найденные порты</h2>
+            <span id="portsSummary"></span>
+          </div>
+          <div id="portsList" class="ports-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="projectTemplate">
+      <article class="project-card">
+        <div class="project-main">
+          <div class="project-title-row">
+            <h3></h3>
+            <span class="status"></span>
+          </div>
+          <div class="meta"></div>
+          <div class="command"></div>
+        </div>
+        <div class="actions">
+          <button data-action="open" data-action-label="open">Открыть</button>
+          <button data-action="start" data-action-label="start">Вкл</button>
+          <button data-action="restart" data-action-label="restart">Перезагрузить</button>
+          <button data-action="stop" data-action-label="stop">Выкл</button>
+          <button data-action="edit" data-action-label="edit">Редактировать</button>
+          <button data-action="folder" data-action-label="folderBtn">Папка</button>
+          <button class="danger" data-action="kill" data-action-label="kill">Убить порт</button>
+          <button class="danger ghost" data-action="remove" data-action-label="remove">Удалить</button>
+        </div>
+        <pre class="logs"></pre>
+      </article>
+    </template>
+
+    <template id="portTemplate">
+      <article class="port-card">
+        <div>
+          <div class="port-title"></div>
+          <div class="port-meta"></div>
+        </div>
+        <div class="port-actions">
+          <button data-port-action="open" data-action-label="open">Открыть</button>
+          <button class="danger" data-port-action="kill" data-action-label="killProcess">Остановить</button>
+        </div>
+      </article>
+    </template>
+
+    <div id="toast" class="toast"></div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
