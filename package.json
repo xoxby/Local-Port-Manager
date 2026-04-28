@@ -1,7 +1,7 @@
 {
   "name": "local-port-manager",
   "version": "0.1.0",
-  "description": "Desktop app for managing local development servers and occupied ports on Windows.",
+  "description": "Настольное приложение для управления локальными dev-серверами и занятыми портами в Windows.",
   "main": "src/main.js",
   "scripts": {
     "start": "electron .",
@@ -9,9 +9,9 @@
   },
   "license": "MIT",
   "keywords": [
-    "ports",
-    "localhost",
-    "development",
+    "порты",
+    "локальный сервер",
+    "разработка",
     "electron",
     "windows"
   ],
